@@ -54,7 +54,7 @@ const Login = () => {
       />
       <br />
       <button onClick={handleLogin} className="login-button" disabled={loading}>
-        {loading ? 'Carregando......' : 'Acessar'}
+        {loading ? 'Carregando...' : 'Acessar'}
       </button>
       <p className="login-message">{message}</p>
     </div>

@@ -17,13 +17,21 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
+      - name: Verify branches
+        run: git branch -a
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
-          base: main # The branch you want to merge into
+          base: main
           title: "[Automated] Update from develop"
           body: "This pull request was automatically created to merge changes from develop to main."
-          labels: "automated, update" # Use labels to categorize the PR
+          labels: "automated, update"
           commit-message: "Update from develop"
           branch: "auto-update-from-develop"
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: List pull requests
+        run: gh pr list --state open
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
