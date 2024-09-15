@@ -20,7 +20,7 @@ on:
 jobs:
   automerge:
     runs-on: ubuntu-latest
-    permissions: # Mover o permissions para o nível do job
+    permissions:
       contents: write
     steps:
       - id: automerge
