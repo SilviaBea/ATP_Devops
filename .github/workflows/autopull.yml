@@ -18,6 +18,6 @@ jobs:
         with:
           branch: "main"
           base: "develop"
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: "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"
           title: "[Automated] Update from develop"
           body: "This pull request was automatically created to merge changes from develop to main."
