@@ -18,6 +18,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           base: main
-          head: develop
+          branch: develop # Este é o nome da branch de origem
           title: "[Automated] Update from develop"
           body: "This pull request was automatically created to merge changes from develop to main."
+          labels: "automated, update"
