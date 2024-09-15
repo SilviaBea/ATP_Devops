@@ -1,34 +1,30 @@
-name: Auto Pull Request
-
+name: automerge
 on:
-  push:
-    branches:
-      - develop
+  pull_request:
+    types:
+      - labeled
+      - unlabeled
+      - synchronize
+      - opened
+      - edited
+      - ready_for_review
+      - reopened
+      - unlocked
+  pull_request_review:
+    types:
+      - submitted
+  check_suite:
+    types:
+      - completed
 
 jobs:
-  create-pull-request:
+  automerge:
     runs-on: ubuntu-latest
-
+    permissions: # Mover o permissions para o nível do job
+      contents: write
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v3
-
-      - name: Create Pull Request
-        uses: devops-infra/action-pull-request@v0.5.5
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: development
-          target_branch: master
-          title: My pull request
-          template: .github/PULL_REQUEST_TEMPLATE.md
-          body: "**Automated pull request**"
-          reviewer: octocat
-          assignee: octocat
-          label: enhancement
-          milestone: My milestone
-          draft: true
-          old_string: "<!-- Add your description here -->"
-          new_string: "** Automatic pull request**"
-          get_diff: true
-          ignore_users: "dependabot"
-          allow_no_diff: false
+      - id: automerge
+        name: automerge
+        uses: "pascalgn/automerge-action@v0.16.3"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
