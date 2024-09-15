@@ -16,7 +16,7 @@ jobs:
       - name: Create Pull Request
         uses: repo-sync/pull-request@v2
         with:
-          destination_branch: "main" # Branch para onde o PR será criado
+          destination_branch: "main"
           github_token: ${{ secrets.test }}
           pr_label: "automated, update"
           pr_title: "[Automated] Update from develop"
