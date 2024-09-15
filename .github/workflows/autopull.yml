@@ -16,8 +16,8 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7.0.2
         with:
-          destination_branch: "main"
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          pr_label: "automated, update"
-          pr_title: "[Automated] Update from develop"
-          pr_body: "This pull request was automatically created to merge changes from develop to main."
+          branch: "develop"
+          base: "main"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: "[Automated] Update from develop"
+          body: "This pull request was automatically created to merge changes from develop to main."
