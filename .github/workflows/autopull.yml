@@ -17,7 +17,7 @@ jobs:
         uses: repo-sync/pull-request@v2
         with:
           destination_branch: "main"
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }} # Use o segredo padrão para GitHub Actions
           pr_label: "automated, update"
           pr_title: "[Automated] Update from develop"
           pr_body: "This pull request was automatically created to merge changes from develop to main."
