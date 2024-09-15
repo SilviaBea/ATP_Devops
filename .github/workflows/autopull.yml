@@ -3,7 +3,7 @@ name: Auto Pull Request
 on:
   push:
     branches:
-      - develop # Branch que você está monitorando
+      - develop
 
 jobs:
   create-pull-request:
@@ -11,12 +11,14 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          ref: develop
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: "20" # Ou a versão que você está usando
+          node-version: "20" # Usando a versão mais recente do Node.js
 
       - name: Install dependencies
         run: npm install
@@ -26,16 +28,19 @@ jobs:
 
       - name: Create a branch for the pull request
         run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git fetch origin
           git checkout -b update-branch
           git add .
           git commit -m "Automated update"
           git push origin update-branch
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          base: main # Branch de destino do pull request
-          head: update-branch # Branch de origem do pull request
+          base: main
+          head: update-branch
           title: "Automated Pull Request"
           body: "This is an automated pull request created by GitHub Actions."
